@@ -8,6 +8,7 @@ use App\Http\Controllers\UsuariosController;
 
 Route::controller(TarefasController::class)->group(function () {
     Route::get('/tarefas', 'listarTarefas');
+    Route::post('/cadastrar-tarefa', 'cadastrarTarefa');
 });
 
 Route::controller(UsuariosController::class)->group(function () {

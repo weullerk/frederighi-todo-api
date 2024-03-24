@@ -15,3 +15,4 @@ php artisan jwt:secret
 http://localhost/frederighi-todo-api/public/api/cadastrar
 http://localhost/frederighi-todo-api/public/api/verificar-email
 http://localhost/frederighi-todo-api/public/api/login
+http://localhost/frederighi-todo-api/public/api/cadastrar-tarefa
