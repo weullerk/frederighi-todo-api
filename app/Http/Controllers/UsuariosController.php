@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Exceptions\Usuarios\FalhaCadastrarUsuarioException;
 use App\Services\UsuarioService;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -25,6 +26,8 @@ class UsuariosController extends Controller
 
                 return response()->json(['message' => 'Cadastro realizado com sucesso!']);
             } catch (FalhaCadastrarUsuarioException $e) {
+                return response()->json([ 'message' => $e->getMessage()]);
+            } catch (Exception $e) {
                 return response()->json([ 'message' => $e->getMessage()]);
             }
         } else {

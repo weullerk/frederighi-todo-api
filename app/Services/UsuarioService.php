@@ -12,12 +12,9 @@ class UsuarioService
      */
     public function cadastrar($data)
     {
-        $userModel = new User();
-        $userModel->name = $data['nome'];
-        $userModel->email = $data['email'];
-        $userModel->password = encrypt($data['senha']);
+        $userData = ['name' => $data['nome'], 'email' => $data['email'], 'password' => $data['senha']];
 
-        if ($userModel->save()) {
+        if (User::create($userData)) {
             return true;
         } else {
             throw new FalhaCadastrarUsuarioException();

@@ -10,3 +10,6 @@ CREATE DATABASE `frederighi_todo_api`;
 
 ### Gerar chave jwt
 php artisan jwt:secret
+
+### Endpoints
+http://localhost/frederighi-todo-api/public/api/cadastrar
