@@ -35,4 +35,33 @@ class UsuariosController extends Controller
             ]);
         }
     }
+
+    public function verificarEmail(Request $request) {
+        $formData = $request->all();
+
+        $validator = Validator::make($formData, [
+            'email' => 'required',
+        ]);
+
+        if (!$validator->fails()) {
+            try {
+                $usuarioService = new UsuarioService();
+                $email = $usuarioService->verificarEmail($formData["email"]);
+
+                if ($email->count()) {
+                    return response()->json(['email' => 'true']);
+                } else {
+                    return response()->json(['email' => 'false']);
+
+                }
+            } catch (FalhaCadastrarUsuarioException|Exception $e) {
+                return response()->json([ 'message' => $e->getMessage()]);
+            }
+        } else {
+            return response()->json([
+                'message' =>
+                'Falha ao realizar cadastro, os dados necessários não foram preenchidos ou estão incorretos!'
+            ]);
+        }
+    }
 }

@@ -13,3 +13,5 @@ php artisan jwt:secret
 
 ### Endpoints
 http://localhost/frederighi-todo-api/public/api/cadastrar
+http://localhost/frederighi-todo-api/public/api/verificar-email
+http://localhost/frederighi-todo-api/public/api/login

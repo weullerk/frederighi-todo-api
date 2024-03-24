@@ -20,4 +20,9 @@ class UsuarioService
             throw new FalhaCadastrarUsuarioException();
         }
     }
+
+    public function verificarEmail($email)
+    {
+        return User::where('email', $email);
+    }
 }

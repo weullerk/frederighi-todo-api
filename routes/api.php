@@ -12,6 +12,7 @@ Route::controller(TarefasController::class)->group(function () {
 
 Route::controller(UsuariosController::class)->group(function () {
     Route::post('/cadastrar', 'cadastrar');
+    Route::post('/verificar-email', 'verificarEmail');
 });
 
 Route::controller(AuthController::class)->group(function () {
