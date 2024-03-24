@@ -6,10 +6,6 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TarefasController;
 use App\Http\Controllers\UsuariosController;
 
-Route::get('/user', function (Request $request) {
-    return $request->user();
-})->middleware('auth:sanctum');
-
 Route::controller(TarefasController::class)->group(function () {
     Route::get('/tarefas', 'listarTarefas');
 });

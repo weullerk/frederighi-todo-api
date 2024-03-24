@@ -25,9 +25,7 @@ class UsuariosController extends Controller
                 $usuarioService->cadastrar($formData);
 
                 return response()->json(['message' => 'Cadastro realizado com sucesso!']);
-            } catch (FalhaCadastrarUsuarioException $e) {
-                return response()->json([ 'message' => $e->getMessage()]);
-            } catch (Exception $e) {
+            } catch (FalhaCadastrarUsuarioException|Exception $e) {
                 return response()->json([ 'message' => $e->getMessage()]);
             }
         } else {
