@@ -12,12 +12,13 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('tarefas', function (Blueprint $table) {
-
-
             $table->id();
             $table->string('descricao');
-            $table->enum('status', ['easy', 'hard']);
+            $table->enum('status', ['pendente', 'concluído']);
+            $table->unsignedBigInteger('user_id');
             $table->timestamps();
+
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 
