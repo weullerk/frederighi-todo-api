@@ -11,6 +11,7 @@ Route::controller(TarefasController::class)->group(function () {
     Route::post('/cadastrar-tarefa', 'cadastrarTarefa');
     Route::post('/editar-tarefa/{id}', 'editarTarefa');
     Route::post('/excluir-tarefa/{id}', 'excluirTarefa');
+    Route::get('/exibir-tarefa/{id}', 'exibirTarefa');
 });
 
 Route::controller(UsuariosController::class)->group(function () {

@@ -3,8 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Exceptions\Tarefas\FalhaCadastrarTarefaException;
+use App\Exceptions\Tarefas\FalhaEditarTarefaException;
 use App\Exceptions\Tarefas\FalhaEditarTarefaIdNumericoMissingException;
 use App\Exceptions\Tarefas\FalhaEditarTarefaNotFoundException;
+use App\Exceptions\Tarefas\FalhaExcluirTarefaException;
+use App\Exceptions\Tarefas\FalhaExcluirTarefaIdNumericoMissingException;
+use App\Exceptions\Tarefas\FalhaExcluirTarefaNotFoundException;
+use App\Exceptions\Tarefas\FalhaExibirTarefaIdNumericoMissingException;
+use App\Exceptions\Tarefas\FalhaExibirTarefaNotFoundException;
 use App\Exceptions\Usuarios\FalhaCadastrarUsuarioException;
 use App\Services\TarefaService;
 use App\Services\UsuarioService;
@@ -32,7 +38,7 @@ class TarefasController
 
                 return response()->json(['message' => 'Tarefa cadastrada com sucesso!']);
             } catch (FalhaCadastrarTarefaException|Exception $e) {
-                return response()->json([ 'message' => $e->getMessage()]);
+                return response()->json(['message' => $e->getMessage()]);
             }
         } else {
             return response()->json([
@@ -55,8 +61,13 @@ class TarefasController
                 $usuarioService->editar($id, $formData);
 
                 return response()->json(['message' => 'Tarefa editada com sucesso!']);
-            } catch (FalhaEditarTarefaIdNumericoMissingException|FalhaEditarTarefaNotFoundException|Exception $e) {
-                return response()->json([ 'message' => $e->getMessage()]);
+            } catch (
+                FalhaEditarTarefaIdNumericoMissingException|
+                FalhaEditarTarefaNotFoundException|
+                FalhaEditarTarefaException|
+                Exception $e
+            ) {
+                return response()->json(['message' => $e->getMessage()]);
             }
         } else {
             return response()->json([
@@ -72,8 +83,29 @@ class TarefasController
             $usuarioService->excluir($id);
 
             return response()->json(['message' => 'Tarefa excluida com sucesso!']);
-        } catch (FalhaEditarTarefaIdNumericoMissingException|FalhaEditarTarefaNotFoundException|Exception $e) {
-            return response()->json([ 'message' => $e->getMessage()]);
+        } catch (
+            FalhaExcluirTarefaIdNumericoMissingException|
+            FalhaExcluirTarefaNotFoundException|
+            FalhaExcluirTarefaException|
+            Exception $e
+        ) {
+            return response()->json(['message' => $e->getMessage()]);
+        }
+    }
+
+    public function exibirTarefa($id, Request $request)
+    {
+        try {
+            $usuarioService = new TarefaService();
+            $tarefa = $usuarioService->exibir($id);
+
+            return response()->json(['tarefa' => $tarefa]);
+        } catch (
+            FalhaExibirTarefaIdNumericoMissingException|
+            FalhaExibirTarefaNotFoundException|
+            Exception $e
+        ) {
+            return response()->json(['message' => $e->getMessage()]);
         }
     }
 }
