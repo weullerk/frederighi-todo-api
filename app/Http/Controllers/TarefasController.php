@@ -21,7 +21,11 @@ use Illuminate\Support\Facades\Validator;
 class TarefasController
 {
     public function listarTarefas(Request $request) {
-        return response()->json(['nome' => 'tarefa']);
+        $tarefaService = new TarefaService();
+
+        $tarefas = $tarefaService->listarTarefas();
+
+        return response()->json(['tarefas' => $tarefas]);
     }
 
     public function cadastrarTarefa(Request $request) {

@@ -15,6 +15,10 @@ use App\Models\Tarefa;
 
 class TarefaService
 {
+    public function listarTarefas() {
+        return Tarefa::orderByDesc('id')->get();
+    }
+
     /**
      * @throws FalhaCadastrarTarefaException
      */
