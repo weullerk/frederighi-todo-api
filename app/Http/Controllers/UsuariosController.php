@@ -49,9 +49,9 @@ class UsuariosController extends Controller
                 $email = $usuarioService->verificarEmail($formData["email"]);
 
                 if ($email->count()) {
-                    return response()->json(['email' => 'true']);
+                    return response()->json(['exists' => 'true']);
                 } else {
-                    return response()->json(['email' => 'false']);
+                    return response()->json(['exists' => 'false']);
 
                 }
             } catch (FalhaCadastrarUsuarioException|Exception $e) {
