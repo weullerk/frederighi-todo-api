@@ -33,8 +33,8 @@ class TarefasController
 
         if (!$validator->fails()) {
             try {
-                $usuarioService = new TarefaService();
-                $usuarioService->cadastrar($formData, auth()->user()->id);
+                $tarefaService = new TarefaService();
+                $tarefaService->cadastrar($formData, auth()->user()->id);
 
                 return response()->json(['message' => 'Tarefa cadastrada com sucesso!']);
             } catch (FalhaCadastrarTarefaException|Exception $e) {
@@ -57,8 +57,8 @@ class TarefasController
 
         if (!$validator->fails()) {
             try {
-                $usuarioService = new TarefaService();
-                $usuarioService->editar($id, $formData);
+                $tarefaService = new TarefaService();
+                $tarefaService->editar($id, $formData);
 
                 return response()->json(['message' => 'Tarefa editada com sucesso!']);
             } catch (
@@ -79,8 +79,8 @@ class TarefasController
 
     public function excluirTarefa($id, Request $request) {
         try {
-            $usuarioService = new TarefaService();
-            $usuarioService->excluir($id);
+            $tarefaService = new TarefaService();
+            $tarefaService->excluir($id);
 
             return response()->json(['message' => 'Tarefa excluida com sucesso!']);
         } catch (
@@ -96,8 +96,8 @@ class TarefasController
     public function exibirTarefa($id, Request $request)
     {
         try {
-            $usuarioService = new TarefaService();
-            $tarefa = $usuarioService->exibir($id);
+            $tarefaService = new TarefaService();
+            $tarefa = $tarefaService->exibir($id);
 
             return response()->json(['tarefa' => $tarefa]);
         } catch (
