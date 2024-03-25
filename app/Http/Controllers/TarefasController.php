@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Exceptions\Tarefas\FalhaCadastrarTarefaException;
+use App\Exceptions\Tarefas\FalhaEditarTarefaIdNumericoMissingException;
+use App\Exceptions\Tarefas\FalhaEditarTarefaNotFoundException;
 use App\Exceptions\Usuarios\FalhaCadastrarUsuarioException;
 use App\Services\TarefaService;
 use App\Services\UsuarioService;
@@ -30,6 +32,30 @@ class TarefasController
 
                 return response()->json(['message' => 'Tarefa cadastrada com sucesso!']);
             } catch (FalhaCadastrarTarefaException|Exception $e) {
+                return response()->json([ 'message' => $e->getMessage()]);
+            }
+        } else {
+            return response()->json([
+                'message' =>
+                    'Falha ao cadastrar tarefa, os dados necessários não foram preenchidos ou estão incorretos!'
+            ]);
+        }
+    }
+
+    public function editarTarefa($id, Request $request) {
+        $formData = $request->all();
+
+        $validator = Validator::make($formData, [
+            'descricao' => 'required',
+        ]);
+
+        if (!$validator->fails()) {
+            try {
+                $usuarioService = new TarefaService();
+                $usuarioService->editar($id, $formData);
+
+                return response()->json(['message' => 'Tarefa editada com sucesso!']);
+            } catch (FalhaEditarTarefaIdNumericoMissingException|FalhaEditarTarefaNotFoundException|Exception $e) {
                 return response()->json([ 'message' => $e->getMessage()]);
             }
         } else {

@@ -16,3 +16,4 @@ http://localhost/frederighi-todo-api/public/api/cadastrar
 http://localhost/frederighi-todo-api/public/api/verificar-email
 http://localhost/frederighi-todo-api/public/api/login
 http://localhost/frederighi-todo-api/public/api/cadastrar-tarefa
+http://localhost/frederighi-todo-api/public/api/editar-tarefa/2
