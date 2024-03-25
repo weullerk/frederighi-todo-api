@@ -6,6 +6,9 @@ use App\Exceptions\Tarefas\FalhaCadastrarTarefaException;
 use App\Exceptions\Tarefas\FalhaEditarTarefaException;
 use App\Exceptions\Tarefas\FalhaEditarTarefaIdNumericoMissingException;
 use App\Exceptions\Tarefas\FalhaEditarTarefaNotFoundException;
+use App\Exceptions\Tarefas\FalhaExcluirTarefaException;
+use App\Exceptions\Tarefas\FalhaExcluirTarefaIdNumericoMissingException;
+use App\Exceptions\Tarefas\FalhaExcluirTarefaNotFoundException;
 use App\Models\Tarefa;
 
 class TarefaService
@@ -48,6 +51,30 @@ class TarefaService
             return true;
         } else {
             throw new FalhaEditarTarefaException();
+        }
+    }
+
+    /**
+     * @throws FalhaExcluirTarefaException
+     * @throws FalhaExcluirTarefaNotFoundException
+     * @throws FalhaExcluirTarefaIdNumericoMissingException
+     */
+    public function excluir($id) {
+        if (!is_numeric($id)) {
+            throw new FalhaExcluirTarefaIdNumericoMissingException();
+        }
+
+        $tarefa = Tarefa::find($id);
+
+        if(is_null($tarefa)) {
+            throw new FalhaExcluirTarefaNotFoundException();
+        }
+
+
+        if ($tarefa->delete()) {
+            return true;
+        } else {
+            throw new FalhaExcluirTarefaException();
         }
     }
 }

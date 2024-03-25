@@ -65,4 +65,15 @@ class TarefasController
             ]);
         }
     }
+
+    public function excluirTarefa($id, Request $request) {
+        try {
+            $usuarioService = new TarefaService();
+            $usuarioService->excluir($id);
+
+            return response()->json(['message' => 'Tarefa excluida com sucesso!']);
+        } catch (FalhaEditarTarefaIdNumericoMissingException|FalhaEditarTarefaNotFoundException|Exception $e) {
+            return response()->json([ 'message' => $e->getMessage()]);
+        }
+    }
 }
