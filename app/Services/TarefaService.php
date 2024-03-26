@@ -52,6 +52,7 @@ class TarefaService
         }
 
         $tarefa->descricao = $data["descricao"];
+        $tarefa->status = $data["status"];
 
         if ($tarefa->save()) {
             return true;
